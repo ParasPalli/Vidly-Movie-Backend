@@ -1,14 +1,21 @@
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
-const customer_router = require('./routes/customers');
-const genre_router = require('./routes/genre');
+
+const customers_router = require('./routes/customers');
+const genres_router = require('./routes/genre');
+const movies_router = require('./routes/movies');
+const rentals_router = require('./routes/rentals');
 
 const express = require('express');
 const app = express();
 
 // Routes
 app.use(express.json());
-app.use(customer_router);
-app.use(genre_router);
+app.use('/api/customers', customers_router);
+app.use('/api/genres', genres_router);
+app.use('/api/movies', movies_router);
+app.use('/api/rentals', rentals_router);
 
 // MongoDb Connection
 mongoose.connect('mongodb://localhost:27017/testing')
